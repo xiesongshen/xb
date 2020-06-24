@@ -1,8 +1,12 @@
 package com.xss.controller;
 
+import com.xss.entity.Dept;
+import com.xss.entity.PageCount;
 import com.xss.entity.User;
+import com.xss.service.DeptService;
 import com.xss.service.UserService;
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +24,44 @@ public class UserServlet extends BaseServlet {
 
 
     public void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = UserService.listAll();
-        req.setAttribute("list",users);
-        req.getRequestDispatcher("/jsp/user/list.jsp").forward(req,resp);
+        String username = req.getParameter("username");
+        String gender = req.getParameter("gender");
+        String deptId = req.getParameter("deptId");
+        PageCount p = new PageCount();
+
+
+        if (username == null) {
+            username = "";
+        }
+
+        if (gender == null) {
+            gender = "-1";
+        }
+
+        if (deptId == null) {
+            deptId = "-1";
+        }
+
+        //获取数据数
+        Integer count = UserService.findPageCount(username,gender,deptId);
+        p.setCount(count);
+
+        //总页数
+        Integer pageCount = p.getPageCount();
+
+        //获取当前页
+        String pageStr = req.getParameter("page");
+
+
+        PageCount page = UserService.listAll(username, gender, deptId, pageStr);
+        req.setAttribute("username", username);
+        req.setAttribute("gender", gender);
+        req.setAttribute("deptId", deptId);
+        req.setAttribute("list", page);
+
+
+
+        req.getRequestDispatcher("/jsp/user/list.jsp").forward(req, resp);
     }
 
     public void addUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +70,7 @@ public class UserServlet extends BaseServlet {
         user.setRegisterTime(new Date());
 
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
         } catch (Exception e) {
         }
 
@@ -43,12 +82,44 @@ public class UserServlet extends BaseServlet {
         String username = req.getParameter("username");
         User userByN = UserService.findUserByN(username);
 
-        if (userByN != null){
-            resp.getWriter().write("用户名已存在");
+        if (userByN != null) {
+            resp.getWriter().write("1");
+        } else {
+            resp.getWriter().write("0");
         }
     }
 
     public void del(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("user del");
+        String id = req.getParameter("id");
+
+        System.out.println(id);
+        UserService.delById(Integer.valueOf(id));
+        resp.sendRedirect("/user/list");
+    }
+
+    public void toUpdateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+
+        User user = UserService.findUserById(Integer.valueOf(id));
+        List<Dept> depts = DeptService.listDept();
+
+        req.setAttribute("dept", depts);
+        req.setAttribute("user", user);
+
+        req.getRequestDispatcher("/jsp/user/updateUser.jsp").forward(req, resp);
+    }
+
+    public void updateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map map = req.getParameterMap();
+
+        User user = new User();
+        try {
+            BeanUtils.populate(user, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        UserService.updateUser(user);
+        resp.sendRedirect("/user/list");
     }
 }
