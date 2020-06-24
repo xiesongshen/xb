@@ -1,10 +1,15 @@
 package com.xss.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.xss.entity.Dept;
+import com.xss.service.DeptService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author XSS
@@ -13,7 +18,14 @@ import java.io.IOException;
  */
 @WebServlet("/dept/*")
 public class DeptServlet extends BaseServlet {
-    public void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/dept/dept.jsp").forward(req,resp);
+
+    public void listDept(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Dept> depts = DeptService.listDept();
+        resp.getWriter().write(JSON.toJSONString(depts));
     }
+
+    public void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/jsp/dept/dept.jsp");
+    }
+
 }
