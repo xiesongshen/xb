@@ -10,17 +10,17 @@ public class UserDao extends BaseDao {
 
     public List<User> listAll(String username, String gender, String deptId, PageCount page) {
         if ("-1".equals(gender) && "-1".equals(deptId)) {
-            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? LIMIT ?,5";
-            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%",(page.getPage() - 1) * page.getSize());
+            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? LIMIT ?,?";
+            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%",(page.getPage() - 1) * page.getSize(),page.getSize());
         } else if ("-1".equals(deptId)) {
-            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and gender=? LIMIT ?,5";
-            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(gender),(page.getPage() - 1) * page.getSize());
+            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and gender=? LIMIT ?,?";
+            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(gender),(page.getPage() - 1) * page.getSize(),page.getSize());
         } else if ("-1".equals(gender)) {
-            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and dept_id=? LIMIT ?,5";
-            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(deptId),(page.getPage() - 1) * page.getSize());
+            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and dept_id=? LIMIT ?,?";
+            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(deptId),(page.getPage() - 1) * page.getSize(),page.getSize());
         } else {
-            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and dept_id=? and gender=? LIMIT ?,5";
-            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(deptId), Integer.valueOf(gender),(page.getPage() - 1) * page.getSize());
+            String sql = "select user.id id,user.username,user.email email,user.real_name realName,user.age age,user.phone phone,user.gender gender,user.register_time registerTime,dept.name deptName from user LEFT JOIN dept on user.dept_id=dept.id where username like ? and dept_id=? and gender=? LIMIT ?,?";
+            return template.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + username + "%", Integer.valueOf(deptId), Integer.valueOf(gender),(page.getPage() - 1) * page.getSize(),page.getSize());
         }
 
     }
