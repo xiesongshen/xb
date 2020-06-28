@@ -1,10 +1,12 @@
 package com.xss.controller;
 
+import com.xss.constants.SysConstants;
 import com.xss.entity.Dept;
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
 import com.xss.service.DeptService;
 import com.xss.service.UserService;
+import com.xss.utils.MDUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.util.StringUtils;
 
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -58,7 +61,6 @@ public class UserServlet extends BaseServlet {
         req.setAttribute("gender", gender);
         req.setAttribute("deptId", deptId);
         req.setAttribute("list", page);
-
 
 
         req.getRequestDispatcher("/jsp/user/list.jsp").forward(req, resp);
@@ -119,7 +121,10 @@ public class UserServlet extends BaseServlet {
             e.printStackTrace();
         }
 
+        user.setPassword(MDUtil.md5(user.getPassword()));
+
         UserService.updateUser(user);
         resp.sendRedirect("/user/list");
     }
+
 }

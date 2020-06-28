@@ -2,6 +2,7 @@ package com.xss.dao;
 
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.List;
@@ -51,7 +52,11 @@ public class UserDao extends BaseDao {
 
     public User findUserByN(String str) {
         String sql = "select * from user where username = ?";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), str);
+        try {
+            return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), str);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 
     public void delById(Integer id) {
@@ -67,6 +72,6 @@ public class UserDao extends BaseDao {
     public void updateUser(User user) {
         String sql = "update user set username=?,password=?,email=?,real_name=?,age=?,phone=?,gender=?,description=?,dept_id=? where id=? ";
         template.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getRealName(), user.getAge(), user.getPhone(), user.getGender(), user.getDescription(), user.getDeptId(), user.getId());
-
     }
+
 }

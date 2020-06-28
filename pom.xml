@@ -89,6 +89,13 @@
       <version>1.2.62</version>
     </dependency>
 
+    <!-- 邮件发送 -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
+    </dependency>
+
     <!-- Map映射model -->
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -96,6 +103,8 @@
       <version>1.9.3</version>
     </dependency>
   </dependencies>
+
+
 
   <build>
     <finalName>xb</finalName>

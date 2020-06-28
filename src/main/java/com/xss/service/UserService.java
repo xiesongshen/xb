@@ -3,6 +3,7 @@ package com.xss.service;
 import com.xss.dao.UserDao;
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
+import com.xss.utils.MDUtil;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class UserService {
     }
 
     public static void addUser(User user){
+        user.setPassword(MDUtil.md5(user.getPassword()));
         userDao.addUser(user);
     }
 

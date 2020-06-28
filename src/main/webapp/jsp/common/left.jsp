@@ -10,9 +10,10 @@
     }
     #left{
         border: 1px solid yellow;
-        width: 20%;
+        width: 15%;
         height: 89%;
         float: left;
+        font-size: 120%;
     }
 
     ul,li{
@@ -22,9 +23,12 @@
 
     #right{
         border: 1px solid gray;
-        width: 79%;
+        width: 84%;
         height: 89%;
         float: left;
+    }
+    #pro{
+        margin-left: 10%;
     }
 </style>
 <body>
@@ -60,10 +64,10 @@
                 var children = data.children;
                 for (var i = 0; i < parent.length; i++) {
                     html+=parent[i].name;
-                    html+='<ul>';
+                    html+='<ul class="nav nav-pills nav-stacked">';
                     for (var j = 0; j < children.length; j++) {
                         if (children[j].pId == parent[i].id){
-                            html += '<li><a href="' + children[j].url + '">' + children[j].name + '</a></li>';
+                            html += '<li id="pro" role="presentation"><a href="' + children[j].url + '">' + children[j].name + '</a></li>';
                         }
                     }
                     html+='</ul>';
@@ -71,6 +75,12 @@
                 $("#left").append(html);
             }
         })
+
+
+    })
+
+    $("#pro").click(function () {
+        alert("aa")
     })
 </script>
 </html>

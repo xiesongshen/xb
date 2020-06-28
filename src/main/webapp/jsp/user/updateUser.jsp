@@ -37,7 +37,7 @@
         <div class="form-group">
             <label for="password" class="col-sm-2 control-label">密码</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="password" name="password" value="${user.password}">
+                <input type="text" class="form-control" id="password" name="password">
             </div>
         </div>
 
