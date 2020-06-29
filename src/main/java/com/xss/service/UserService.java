@@ -50,4 +50,8 @@ public class UserService {
     public static Integer findPageCount(String username,String gender,String deptId){
         return userDao.findPageCount(username,gender,deptId);
     }
+
+    public static void updateHeadImg(String pic,Integer id) {
+        userDao.updateHeadImg(pic,id);
+    }
 }

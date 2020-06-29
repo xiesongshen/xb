@@ -11,21 +11,44 @@
     <title>添加用户</title>
 </head>
 <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
     #box{
         position: relative;
         width: 100%;
         height: 100%;
     }
     form {
-        padding-top: 5%;
+        color: white;
         position: absolute;
         width: 80%;
+
+    }
+
+    #head-img{
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        float: right;
+        border-radius: 50%;
+        top: 10%;
+        left: 88%;
+    }
+    #chose{
+        position: absolute;
+        top: 8%;
+        left: 80%;
+        font-weight: bold;
     }
 </style>
 <body>
+<%@include file="/jsp/common/top.jsp" %>
 <div id="box">
     <form action="/user/updateUser" method="post" class="form-horizontal">
-        <input type="hidden" name="id" value="${user.id}">
+        <input type="hidden" name="id" value="${user.id}" id="id">
+
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-5">
@@ -89,9 +112,9 @@
 
         <div style="padding-left: 12%;padding-top: 2%">
             <b style="padding-right: 3%">部门</b>
-            <select class="form-group-lg" id="deptId" name="deptId">
+            <select class="form-group-lg" id="deptId" name="deptId" style="color: black">
                 <c:forEach var="dept" items="${dept}">
-                    <option <c:if test="${user.deptId==dept.id}">selected</c:if> value="${dept.id}" >${dept.name}</option>
+                    <option style="color: black" <c:if test="${user.deptId==dept.id}">selected</c:if> value="${dept.id}" >${dept.name}</option>
                 </c:forEach>
             </select><br><br>
         </div>
@@ -100,6 +123,11 @@
             <button type="submit" class="btn btn-success">修改</button>
             <button type="reset" class="btn btn-primary">重置</button>
         </div>
+
+        <span id="chose">选择头像</span>
+        <img id="head-img" src="/img/getHead?id=${user.id}">
+        <!-- 真正的头像图片上传表单 -->
+        <input type="file" id="picFile" style="display: none;">
     </form>
 
 </div>
@@ -118,6 +146,35 @@
                     $("#span").attr("hidden",true);
                 }
             }
+        })
+    })
+
+    $("#head-img").click(function () {
+        $("#picFile").click();
+    })
+
+    $(function () {
+        $("#picFile").change(function () {
+
+            // 构造文件上传form
+            var formData = new FormData();
+            formData.append("iconFile", document.getElementById("picFile").files[0]);
+
+            $.ajax({
+                url: "/img/upload",
+                processData: false,      //默认为true,对请求传递的参数(formData)不做编码处理
+                contentType: false,       //不对请求头做处理
+                type:"post",
+                data:formData,
+                dataType: "",
+                success:function (data) {
+                    if(data==1){
+                        $("#head-img").attr("src","/img/getHead?id="+$("#id").val()+"&nocache="+new Date().getTime())
+                    }else {
+                        //上传失败
+                    }
+                }
+            })
         })
     })
 </script>

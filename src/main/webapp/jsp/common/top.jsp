@@ -4,14 +4,29 @@
     <title>top</title>
 </head>
 <style>
-    #top{
-        border: 1px solid red;
-        width: 100%;
-        height: 10%;
+    body {
+        background-image: url("/doc/bg.jpg");
     }
 
+    #top {
+        width: 100%;
+        height: 10%;
+        color: wheat;
+    }
+
+    #loginOut {
+        float: right;
+        margin-right: 2.6%;
+    }
 </style>
 <body>
-<div id="top">这是头部</div>
+<div id="top">
+    <div class="page-header">
+        <h1>小标交友
+            <small>XiaoBiao Meetting</small>
+            <a href="/login/loginOut" id="loginOut" type="button" class="btn btn-default">登出</a>
+        </h1>
+    </div>
+</div>
 </body>
 </html>

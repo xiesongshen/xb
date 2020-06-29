@@ -6,9 +6,13 @@ package com.xss.constants;
  * @desc
  */
 public class SysConstants {
-    public static String LOGIN_CHECK = "loginCheck";
+    public static final String SESSION_LOGIN_CHECK = "loginCheck";
 
-    public static String SESSION_CODE = "randomCode";
+    public static final String SESSION_CODE = "randomCode";
 
-    public static String COOKIE_USER = "user";
+    public static final String COOKIE_USER = "user";
+
+    public static final String SESSION_IMGCODE = "imgCode";
+
+    public static final String FILE_PREFIX = "D:\\uploadImg\\";
 }

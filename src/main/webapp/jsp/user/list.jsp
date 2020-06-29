@@ -9,8 +9,8 @@
 <%@include file="../common/top.jsp"%>
 <%@include file="../common/left.jsp"%>
 <div id="right">
-    <a href="/jsp/user/addUser.jsp" class="btn btn-info" style="float: right">添加</a>
-    <form action="/user/list" method="post" class="form-inline" style="float: left">
+    <a href="/jsp/user/addUser.jsp" class="btn btn-info" style="float: right;margin-top: 2%;margin-right: 1.8%">添加</a>
+    <form action="/user/list" method="post" class="form-inline" style="float: left;margin-top: 2%;">
         <div class="form-group">
             <label for="username">用户名</label>
             <input type="text" class="form-control" id="username" name="username" value="${username}">
@@ -33,7 +33,7 @@
         <button type="submit" class="btn btn-default">查找</button>
     </form>
 
-    <table class="table table-hover">
+    <table class="table table-hover" style="margin-top: 8%">
         <tr>
             <td>序号</td>
             <td>用户名</td>
@@ -75,12 +75,14 @@
         </c:forEach>
     </table>
 
-    总页数：${list.pageCount}
-    总数据数：${list.count}
-    当前页码：${list.page}
-    <a  href="/user/list?page=${list.page-1>0?list.page-1:1}&username=${username}&gender=${gender}&deptId=${deptId}">上一页</a>
-    <a  href="/user/list?page=${list.page+1>=list.pageCount?list.pageCount:list.page+1}&username=${username}&gender=${gender}&deptId=${deptId}">下一页</a>
+    <div style="margin-top: 20%;margin-left: 1%;color: #0f0f0f">
+        总页数：${list.pageCount}
+        总数据数：${list.count}
+        当前页码：${list.page}
+        <a  href="/user/list?page=${list.page-1>0?list.page-1:1}&username=${username}&gender=${gender}&deptId=${deptId}">上一页</a>
+        <a  href="/user/list?page=${list.page+1>=list.pageCount?list.pageCount:list.page+1}&username=${username}&gender=${gender}&deptId=${deptId}">下一页</a>
 
+    </div>
 </div>
 </body>
 <script>

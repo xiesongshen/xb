@@ -38,7 +38,7 @@ public class MyFilter implements Filter {
         resp.setCharacterEncoding("utf-8");
 
         HttpSession session = req.getSession();
-        Object o = session.getAttribute(SysConstants.LOGIN_CHECK);
+        Object o = session.getAttribute(SysConstants.SESSION_LOGIN_CHECK);
         String uri = req.getRequestURI();
 
 
@@ -52,7 +52,7 @@ public class MyFilter implements Filter {
                         //将cookie中的值给进session中
                         value = URLDecoder.decode(value, "utf-8");
                         User user = om.readValue(value, User.class);
-                        session.setAttribute(SysConstants.LOGIN_CHECK, user);
+                        session.setAttribute(SysConstants.SESSION_LOGIN_CHECK, user);
 
 
                         //如果有cookie.则直接跳转到成功页面
@@ -63,7 +63,8 @@ public class MyFilter implements Filter {
                 }
             }
 
-        } else if (uri.endsWith("/login/login") || uri.endsWith("/forget.jsp") || uri.endsWith("/forget/email") || uri.endsWith("/forget/updatePs")) {
+        } else if (uri.endsWith("/login/login") || uri.endsWith("/forget.jsp") || uri.endsWith("/forget/email") || uri.endsWith("/forget/updatePs") || uri.endsWith("/img/getCode") || uri.endsWith("/login/add") || uri.endsWith("/add.jsp")
+                || uri.endsWith("/user/findByN")||uri.endsWith("/dept/listDept")||uri.endsWith("/doc/1.mp4")) {
 
         } else {
             if (o == null) {

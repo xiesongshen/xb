@@ -11,11 +11,14 @@
     <title>添加用户</title>
 </head>
 <style>
+    body {
+        background-color:black;
+    }
     #box{
         position: relative;
         width: 50%;
         height: 80%;
-        background-color: rgba(	192,192,192,.5);
+        background-color:rgba(	169,169,169,.5);
         margin-left: 25%;
         border-radius: 5%;
     }
@@ -25,11 +28,28 @@
         position: absolute;
         width: 90%;
     }
+    #loginBtn {
+        float: right;
+        margin-right: 5%;
+    }
+    #top {
+        background-color: black;
+        width: 100%;
+        height: 10%;
+        color: wheat;
+    }
 </style>
 <body>
-<%@include file="/jsp/common/top.jsp" %>
+<div id="top">
+    <div class="page-header">
+        <h1>小标交友
+            <small>XiaoBiao Meetting</small>
+            <a href="/index.jsp" id="loginBtn" type="button" class="btn btn-info" >登录</a>
+        </h1>
+    </div>
+</div>
 <div id="box">
-    <form action="/user/addUser" method="post" class="form-horizontal">
+    <form action="/login/add" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-10">
@@ -100,7 +120,6 @@
             <button type="submit" class="btn btn-success">注册</button>
             <button type="reset" class="btn btn-primary">重置</button>
         </div>
-
     </form>
 </div>
 </body>
