@@ -5,7 +5,7 @@
 </head>
 <style>
     body {
-        background-image: url("/doc/bg.jpg");
+        background-image: url("/doc/bg1.jpg");
     }
 
     #top {
@@ -24,6 +24,7 @@
     <div class="page-header">
         <h1>小标交友
             <small>XiaoBiao Meetting</small>
+
             <a href="/login/loginOut" id="loginOut" type="button" class="btn btn-default">登出</a>
         </h1>
     </div>
