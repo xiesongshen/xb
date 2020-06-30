@@ -12,7 +12,7 @@
 </head>
 <style>
     body {
-        background-color:black;
+        background-image:url("/doc/bg3.jpg");
     }
     #box{
         position: relative;
@@ -33,7 +33,6 @@
         margin-right: 5%;
     }
     #top {
-        background-color: black;
         width: 100%;
         height: 10%;
         color: wheat;

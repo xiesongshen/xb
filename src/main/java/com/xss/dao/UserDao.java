@@ -43,17 +43,17 @@ public class UserDao extends BaseDao {
     }
 
     public void addUser(User user) {
-        String sql = "INSERT INTO user(username,password,email,real_name,age,phone,gender,description,register_time,dept_id) " +
-                "VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO user(username,password,email,real_name,age,phone,gender,description,register_time,pic,dept_id,wx_openid) " +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        template.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getRealName(), user.getAge(), user.getPhone(), user.getGender(), user.getDescription(), user.getRegisterTime(), user.getDeptId());
+        template.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getRealName(), user.getAge(), user.getPhone(), user.getGender(), user.getDescription(), user.getRegisterTime(),user.getPic(), user.getDeptId(),user.getWxOpenid());
     }
 
 
     public User findUserByN(String str) {
         String sql = "select * from user where username = ?";
         try {
-            return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), str);
+            return template.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),str);
         } catch (DataAccessException e) {
             return null;
         }

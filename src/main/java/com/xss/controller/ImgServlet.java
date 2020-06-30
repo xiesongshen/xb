@@ -119,4 +119,34 @@ public class ImgServlet extends BaseServlet {
             bis.close();
         }
     }
+
+    public void getHead2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user =(User) session.getAttribute(SysConstants.SESSION_LOGIN_CHECK);
+
+        String pic = user.getPic();
+        if (pic.contains("http")){
+            PrintWriter pw = resp.getWriter();
+            pw.write(pic);
+        }else {
+            User userById = UserService.findUserById(user.getId());
+            String path = SysConstants.FILE_PREFIX + userById.getPic();
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
+            ServletOutputStream os = resp.getOutputStream();
+
+            int len;
+            byte[] b = new byte[1024*2];
+            while ((len=bis.read(b))!=-1){
+                os.write(b,0,len);
+            }
+            os.flush();
+            if (os!=null){
+                os.close();
+            }
+            if (bis!=null){
+                bis.close();
+            }
+        }
+
+    }
 }

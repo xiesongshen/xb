@@ -86,10 +86,17 @@ public class LoginServlet extends BaseServlet {
             return;
         }
 
-        req.getRequestDispatcher("/index.jsp").forward(req,resp);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
 
     }
 
+
+    public void showName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute(SysConstants.SESSION_LOGIN_CHECK);
+
+        resp.getWriter().write(user.getUsername());
+    }
 
 }
 

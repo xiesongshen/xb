@@ -34,7 +34,7 @@
     </form>
 
     <table class="table table-hover" style="margin-top: 8%">
-        <tr>
+        <tr style="background-color: rgba(255,255,255,.5)">
             <td>序号</td>
             <td>用户名</td>
             <td>邮箱</td>

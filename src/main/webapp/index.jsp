@@ -12,20 +12,20 @@
 <style>
 
     #BigBox {
-        background-color: rgba(245,245,220,.2);
-        height: 40%;
-        width: 40%;
+        background-color: rgba(245,245,220,.4);
+        height: 50%;
+        width: 30%;
         position: absolute;
         top: 20%;
-        left: 30%;
+        left: 35%;
         border-radius: 5%;
-        color: white;
+        color: black;
     }
 
     #login {
-        width: 100%;
+        width: 120%;
         height: auto;
-        margin-left: 17%;
+        margin-left: 5%;
         margin-top: 10%;
     }
 
@@ -46,7 +46,12 @@
 
     }
     body{
-        background-image: url("/doc/t1.jpg");
+        background-image: url("/doc/bg2.jpg");
+    }
+    #wx{
+        position: absolute;
+        left: 73%;
+        top: 80%;
     }
  /*   video{
         position: fixed;
@@ -124,6 +129,7 @@
                 </div>
             </div>
         </form>
+        <a href="/otherLogin/weChatLogin"><img id="wx" src="/doc/wx.png"></a>
     </div>
 </div>
 
