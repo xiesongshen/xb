@@ -34,6 +34,10 @@
         left: 28%;
         top: 8%;
     }
+    #wel{
+        position: relative;
+        left: .1%;
+    }
 
 </style>
 <body>

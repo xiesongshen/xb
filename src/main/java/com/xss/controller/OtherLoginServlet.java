@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 
 @WebServlet("/otherLogin/*")
-public class OtherLoginServlet extends BaseServlet{
+public class OtherLoginServlet extends BaseServlet {
 
     public void weChatLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Properties pro = new Properties();
@@ -36,7 +36,7 @@ public class OtherLoginServlet extends BaseServlet{
         String redirect_uri = pro.getProperty("wx.redirect_uri");
 
         //Step1：获取Authorization Code
-        String url = "https://open.weixin.qq.com/connect/qrconnect?response_type=code"+
+        String url = "https://open.weixin.qq.com/connect/qrconnect?response_type=code" +
                 "&appid=" + appid +
                 "&redirect_uri=" + URLEncoder.encode(redirect_uri, "GBK") +
                 "&scope=snsapi_login";
@@ -75,7 +75,7 @@ public class OtherLoginServlet extends BaseServlet{
         User user = OtherLoginService.findByOpenId(userInfo.getString("openid"));
 
 
-        if (user==null){
+        if (user == null) {
 
             user = new User();
 

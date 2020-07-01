@@ -1,5 +1,6 @@
 package com.xss.dao;
 
+import com.xss.entity.Meeting;
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
 import org.springframework.dao.DataAccessException;
@@ -77,6 +78,11 @@ public class UserDao extends BaseDao {
     public void updateHeadImg(String pic,Integer id) {
         String sql= "update user set pic=? where id=?";
         template.update(sql,pic,id);
+    }
+
+    public List<User> findUserByDeptId(Integer deptId){
+        String sql = "select * from user where dept_id=?";
+        return template.query(sql,new BeanPropertyRowMapper<>(User.class),deptId);
     }
 
 }

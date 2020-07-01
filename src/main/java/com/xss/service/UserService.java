@@ -1,6 +1,7 @@
 package com.xss.service;
 
 import com.xss.dao.UserDao;
+import com.xss.entity.Meeting;
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
 import com.xss.utils.MDUtil;
@@ -53,5 +54,9 @@ public class UserService {
 
     public static void updateHeadImg(String pic,Integer id) {
         userDao.updateHeadImg(pic,id);
+    }
+
+    public static List<User> findUserByDeptId(Integer deptId){
+        return userDao.findUserByDeptId(deptId);
     }
 }

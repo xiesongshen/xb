@@ -1,7 +1,10 @@
 package com.xss.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xss.constants.SysConstants;
 import com.xss.entity.Dept;
+import com.xss.entity.Meeting;
 import com.xss.entity.PageCount;
 import com.xss.entity.User;
 import com.xss.service.DeptService;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +50,7 @@ public class UserServlet extends BaseServlet {
         }
 
         //获取数据数
-        Integer count = UserService.findPageCount(username,gender,deptId);
+        Integer count = UserService.findPageCount(username, gender, deptId);
         p.setCount(count);
 
         //总页数
@@ -125,6 +129,16 @@ public class UserServlet extends BaseServlet {
 
         UserService.updateUser(user);
         resp.sendRedirect("/user/list");
+    }
+
+    public void findUserByDeptId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String deptId = req.getParameter("deptId");
+        List<User> list = UserService.findUserByDeptId(Integer.valueOf(deptId));
+
+        PrintWriter pw = resp.getWriter();
+        /*ObjectMapper om = new ObjectMapper();*/
+        pw.write(JSON.toJSONString(list));
+
     }
 
 }

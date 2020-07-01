@@ -75,13 +75,16 @@
         </c:forEach>
     </table>
 
-    <div style="margin-top: 20%;margin-left: 1%;color: #0f0f0f">
+    <div style="float: left;margin-top: 18%;margin-left: 1%;color: #0f0f0f">
         总页数：${list.pageCount}
         总数据数：${list.count}
         当前页码：${list.page}
         <a  href="/user/list?page=${list.page-1>0?list.page-1:1}&username=${username}&gender=${gender}&deptId=${deptId}">上一页</a>
         <a  href="/user/list?page=${list.page+1>=list.pageCount?list.pageCount:list.page+1}&username=${username}&gender=${gender}&deptId=${deptId}">下一页</a>
+    </div>
 
+    <div id="export"  style="float: right;margin-top: 17.5%;margin-right: 1.5%">
+        <a href="/poi/exportExcel?username=${username}&gender=${gender}&deptId=${deptId}" class="btn btn-primary">导出excal</a>
     </div>
 </div>
 </body>
